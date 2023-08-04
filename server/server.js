@@ -1,5 +1,6 @@
 const express = require('express');
 require('dotenv').config();
+process.env.SERVER_SESSION_SECRET;
 
 const app = express();
 
