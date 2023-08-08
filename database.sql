@@ -20,7 +20,8 @@ CREATE TABLE "habits" (
 
 CREATE TABLE "destinations" (
     "id" SERIAL PRIMARY KEY,
-    "name" VARCHAR (500)
+    "name" VARCHAR (500),
+    "distance" INTEGER
 );
 
 CREATE TABLE "habit_destination" (
