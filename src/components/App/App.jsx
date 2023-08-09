@@ -21,7 +21,9 @@ import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 import WelcomePage from '../WelcomePage/WelcomePage';
 
+
 import './App.css';
+import DestinationPage from '../DestinationPage/DestinationPage';
 
 function App() {
   const dispatch = useDispatch();
@@ -67,6 +69,24 @@ function App() {
             path="/info"
           >
             <InfoPage />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+
+            exact
+            path="/destinations"
+          >
+            <DestinationPage />
+
+          </ProtectedRoute>
+
+          <ProtectedRoute
+
+            exact
+            path="/welcome"
+          >
+            <WelcomePage />
+
           </ProtectedRoute>
 
           <Route
