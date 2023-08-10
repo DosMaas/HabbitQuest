@@ -1,6 +1,6 @@
 
 
-function CreationPage() {
+function HabitsPage() {
   return (
     <div>
       <h2></h2>
@@ -9,4 +9,4 @@ function CreationPage() {
   )
 };
 
-export default CreationPage;
+export default HabitsPage;

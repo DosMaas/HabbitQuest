@@ -1,7 +1,7 @@
 import { put, takeLatest } from 'redux-saga/effects';
 
 // worker Saga: will be fired on "FETCH_DESTINATION" actions
-function* fetchDestination() {
+function* fetchDestination(action) {
   try {
     const response = yield fetch('/api/destinations');
     if (!response.ok) {
@@ -14,7 +14,7 @@ function* fetchDestination() {
   }
 }
 
-function* addDestination() {
+function* addDestination(action) {
   try {
     const response = yield fetch('/api/destinations', {
       method: 'POST',
@@ -26,7 +26,9 @@ function* addDestination() {
     if (!response.ok) {
       throw new Error('Error adding destination');
     }
-    yield put({ type: 'USE_DESTINATION'});
+    const results = yield response.json();
+    console.log('response:', results);
+    yield put({ type: 'USE_DESTINATION', payload: results});
   } catch (error) {
     console.error(error);
   }
