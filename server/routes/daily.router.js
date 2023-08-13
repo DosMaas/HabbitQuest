@@ -28,3 +28,5 @@ router.post('/', (req, res) => {
 });
 
 module.exports = router;
+
+// Two separate queries in one function - one put to update the boolean to true, and one post to add the date tot he habit_log

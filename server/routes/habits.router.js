@@ -6,9 +6,11 @@ const { rejectUnauthenticated } = require('../modules/authentication-middleware'
 /**
  * GET route template
  */
-router.get('/', (req, res) => {
-  const query = `SELECT * FROM habits ORDER BY name ASC;`;
-  pool.query(query)
+router.get('/', rejectUnauthenticated, (req, res) => {
+  const query = `SELECT * FROM habits 
+  WHERE user_id = $1
+  ORDER BY name ASC ;`;
+  pool.query(query, [req.user.id])
     .then(result => {
       res.send(result.rows);
     })

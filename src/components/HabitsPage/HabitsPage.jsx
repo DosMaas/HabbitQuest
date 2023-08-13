@@ -21,6 +21,7 @@ function HabitsPage() {
       }
     });
     // dispatch({type: 'FETCH_HABIT'});
+    console.log('Check HERE')
     setNewHabit('');
   };
 
@@ -43,6 +44,7 @@ function HabitsPage() {
         <input
           type="text"
           onChange={(event) => setNewHabit(event.target.value)}
+          value={newHabit}
         />
         <button type="submit" >Add Habit</button>
         {/* Make button click disabled without input text */}
