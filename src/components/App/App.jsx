@@ -20,10 +20,10 @@ import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 import WelcomePage from '../WelcomePage/WelcomePage';
-
-
 import './App.css';
 import DestinationPage from '../DestinationPage/DestinationPage';
+import HabitsPage from '../HabitsPage/HabitsPage';
+import DailyPage from '../DailyPage/DailyPage';
 
 function App() {
   const dispatch = useDispatch();
@@ -86,6 +86,24 @@ function App() {
             path="/welcome"
           >
             <WelcomePage />
+
+          </ProtectedRoute>
+
+          <ProtectedRoute
+
+            exact
+            path="/habits"
+          >
+            <HabitsPage />
+
+          </ProtectedRoute>
+
+          <ProtectedRoute
+
+            exact
+            path="/daily"
+          >
+            <DailyPage />
 
           </ProtectedRoute>
 

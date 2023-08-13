@@ -1,6 +1,6 @@
 import { put, takeLatest } from 'redux-saga/effects';
 
-// worker Saga: will be fired on "FETCH_DESTINATION" actions
+// retrieves list of destinations from database for user to choose from
 function* fetchDestination(action) {
   try {
     const response = yield fetch('/api/destinations');

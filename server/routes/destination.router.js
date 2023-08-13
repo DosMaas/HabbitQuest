@@ -4,7 +4,7 @@ const router = express.Router();
 const { rejectUnauthenticated } = require('../modules/authentication-middleware');
 
 /**
- * GET route template
+ * GET route for destinations
  */
 router.get('/', (req, res) => {
   const query = `SELECT * FROM destinations ORDER BY distance ASC`;

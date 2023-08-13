@@ -16,11 +16,11 @@ function DestinationPage() {
   }, []);
 
   function handleClick(destination) {
-    let destinationID = destination.id;
-    let userID = user.id;
+    // let destinationID = destination.id;
+    // let userID = user.id;
     dispatch({ type: 'ADD_DESTINATION', payload: {
-      destinationID: destinationID,
-      userID: userID
+      destinationID: destination.id,
+      userID: user.id
     } });
     history.push('/habits')
   }
@@ -35,6 +35,7 @@ function DestinationPage() {
   return (
     <div>
       <h2>Choose Your Destination</h2>
+      <p>Something witty to explain the destinations</p>
       <section className="destinations">
         {destinations.map(destination => {
           console.log('look here', destination);
