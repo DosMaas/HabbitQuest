@@ -19,8 +19,8 @@ function DestinationPage() {
     // let destinationID = destination.id;
     // let userID = user.id;
     dispatch({ type: 'ADD_DESTINATION', payload: {
-      destinationID: destination.id,
-      userID: user.id
+      destination_id: destination.id,
+      user_id: user.id
     } });
     history.push('/habits')
   }

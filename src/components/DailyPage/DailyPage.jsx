@@ -145,36 +145,6 @@ function DailyPage() {
       flex: 3,
       editable: true,
     },
-
-    // {
-    //   field: 'Edit',
-    //   headerName: '',
-    //   flex: 1,
-    //   // deleteButton: true,
-    //   renderCell: (params) => {
-    //     return (
-    //       <Button
-    //         onClick={() => handleEdit(params)}>
-    //         Edit
-    //       </Button>
-    //     )
-    //   }
-    // },
-    // {
-    //   field: 'Delete',
-    //   headerName: '',
-    //   flex: 1,
-    //   // deleteButton: true,
-    //   renderCell: (params) => {
-    //     return (
-    //       <Button
-    //         onClick={() => handleDelete(params)}>
-    //         Delete
-    //       </Button>
-    //     )
-    //   }
-    // },
-
     {
       field: 'actions',
       type: 'actions',
@@ -233,12 +203,7 @@ function DailyPage() {
           sx={{
             height: 500,
             width: '100%',
-            '& .actions': {
-              color: 'text.secondary',
-            },
-            '& .textPrimary': {
-              color: 'text.primary',
-            },
+            fontFamily: 'fantasy, sans-serif', 
           }}
         >
           <DataGrid

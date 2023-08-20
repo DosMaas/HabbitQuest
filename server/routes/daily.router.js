@@ -66,9 +66,17 @@ router.put('/edit', rejectUnauthenticated, (req, res) => {
 // PUT route to complete daily habits
 router.put('/complete', rejectUnauthenticated, (req, res) => {
   // let complete = req.body.direction;
-  let query = `UPDATE habits SET complete = NOT complete WHERE id=$1; `;
+  console.log('LOOK', req.body)
+  let habitQuery = `UPDATE habits SET complete = NOT complete WHERE id=$1; `;
+  let logQuery = `
+    INSERT INTO habit_log (habit_id, date, destination_id)
+    SELECT $1, NOW(), destinations.id
+    FROM habits
+    JOIN destinations ON destinations.id = habit_log.destination_id
+    WHERE habits.id = habit_log.habit_id;
+  ;`;
 
-  pool.query(query, [req.body.id])
+  pool.query(habitQuery, [req.body.id])
     .then(result => {
       res.send(result.rows);
     })
