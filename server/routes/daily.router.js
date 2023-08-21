@@ -24,23 +24,24 @@ router.get('/dailies', rejectUnauthenticated, (req, res) => {
   // GET route code here
 });
 
-router.get('/history', rejectUnauthenticated, (req, res) => {
-  const query = `
-    SELECT * FROM habits 
-    JOIN habit_log ON habits.id = habit_log.habit_id
-    WHERE user_id = $1
-    ORDER BY name ASC
-  ;`;
-  pool.query(query, [req.user.id])
-    .then(result => {
-      res.send(result.rows);
-    })
-    .catch(error => {
-      console.error('Error: get habits on daily page', error);
-      res.sendStatus(500);
-    })
-  // GET route code here
-});
+// ! ⬇ Unused thus far:
+// router.get('/history', rejectUnauthenticated, (req, res) => {
+//   const query = `
+//     SELECT * FROM habits 
+//     JOIN habit_log ON habits.id = habit_log.habit_id
+//     WHERE user_id = $1
+//     ORDER BY name ASC
+//   ;`;
+//   pool.query(query, [req.user.id])
+//     .then(result => {
+//       res.send(result.rows);
+//     })
+//     .catch(error => {
+//       console.error('Error: get habits on daily page', error);
+//       res.sendStatus(500);
+//     })
+//   // GET route code here
+// });
 
 
 
@@ -64,28 +65,29 @@ router.put('/edit', rejectUnauthenticated, (req, res) => {
 })
 
 // PUT route to complete daily habits
-router.put('/complete', rejectUnauthenticated, (req, res) => {
-  // let complete = req.body.direction;
-  console.log('LOOK', req.body)
-  let habitQuery = `UPDATE habits SET complete = NOT complete WHERE id=$1; `;
-  let logQuery = `
-    INSERT INTO habit_log (habit_id, date, destination_id)
-    SELECT $1, NOW(), destinations.id
-    FROM habits
-    JOIN destinations ON destinations.id = habit_log.destination_id
-    WHERE habits.id = habit_log.habit_id;
-  ;`;
+router.put('/complete', rejectUnauthenticated, async (req, res) => {
+  const toggleQuery = `UPDATE habits SET complete = NOT complete WHERE id = $1`;
+  const insertQuery = `
+    INSERT INTO habit_log 
+      (habit_id, date, destination_id)
+    SELECT 
+      $1, current_date, destination_id
+    FROM habit_destination
+    WHERE user_id = $2 AND active = TRUE;
+  `;
 
-  pool.query(habitQuery, [req.body.id])
-    .then(result => {
-      res.send(result.rows);
-    })
-    .catch(error => {
-      console.error('Error: completing habits on daily page', error);
-      res.sendStatus(500);
-    })
-  // PUT route end
-})
+  const toggleParams = [req.body.id];
+  const insertParams = [req.body.id, req.user.id];
+
+  try {
+    await pool.query(toggleQuery, toggleParams); // Execute the first query to toggle the 'complete' column
+    await pool.query(insertQuery, insertParams); // Execute the second query to insert into habit_log table
+    res.sendStatus(200);
+  } catch (error) {
+    console.error('Error: completing habits on daily page', error);
+    res.sendStatus(500);
+  }; 
+});
 
 // DELETE route for daily habits
 router.delete('/:id', rejectUnauthenticated, (req, res) => {
@@ -106,5 +108,3 @@ router.delete('/:id', rejectUnauthenticated, (req, res) => {
 
 
 module.exports = router;
-
-// Two separate queries in one function - one put to update the boolean to true, and one post to add the date tot he habit_log

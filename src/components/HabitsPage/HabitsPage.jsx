@@ -5,7 +5,6 @@ import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 function HabitsPage() {
   const habits = useSelector(store => store.habit.habitList);
-  console.log(habits, 'habits!')
   const user = useSelector(store => store.user)
   const history = useHistory();
   const dispatch = useDispatch();
@@ -13,7 +12,6 @@ function HabitsPage() {
 
   function addHabit() {
     if(!newHabit) return;
-    console.log('Button press', newHabit);
     dispatch({
       type: 'ADD_HABIT', payload: {
         newHabit: newHabit,
@@ -21,7 +19,6 @@ function HabitsPage() {
       }
     });
     // dispatch({type: 'FETCH_HABIT'});
-    console.log('Check HERE')
     setNewHabit('');
   };
 

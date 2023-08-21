@@ -19,6 +19,7 @@ import {
   GridRowEditStopReasons,
 } from '@mui/x-data-grid';
 import dayjs from 'dayjs';
+import './DailyPage.css';
 
 
 
@@ -33,7 +34,6 @@ function DailyPage() {
   const today = dayjs().format('dddd');
 
 
-  // console.log('Ryan Here DailyPage \n', { dailyHabits, habits, rows, rowModesModel, GridRowModes });
 
   function handleRowEditStop(params, event) {
     if (params.reason === GridRowEditStopReasons.rowFocusOut) {
@@ -80,7 +80,6 @@ function DailyPage() {
   }; // End handleDeleteClick
 
   function handleCancelClick(id) {
-    console.log(`Ryan Here:  handleCancelClick \n `, { id });
     setRowModesModel({
       ...rowModesModel,
       [id]: { mode: GridRowModes.View, ignoreModifications: true },
@@ -193,13 +192,12 @@ function DailyPage() {
     }
   ]; // End columns
 
-  // console.log('Ryan Here: selectRow \n', { selectedRow });
 
 
 
   return (
     <div>
-      <h1>{today}'s Habbits</h1>
+      <h1 className='daily-title'>{today}'s Habbits</h1>
       <div style={{ height: 400, width: '100%' }}>
 
         <Box

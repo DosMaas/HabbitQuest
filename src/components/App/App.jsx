@@ -24,7 +24,7 @@ import './App.css';
 import DestinationPage from '../DestinationPage/DestinationPage';
 import HabitsPage from '../HabitsPage/HabitsPage';
 import DailyPage from '../DailyPage/DailyPage';
-import NavMenu from '../NavMenu/NavMenu';
+import ProgressPage from '../ProgressPage/ProgressPage';
 
 function App() {
   const dispatch = useDispatch();
@@ -105,6 +105,15 @@ function App() {
             path="/daily"
           >
             <DailyPage />
+
+          </ProtectedRoute>
+
+          <ProtectedRoute
+
+            exact
+            path="/progress"
+          >
+            <ProgressPage />
 
           </ProtectedRoute>
 

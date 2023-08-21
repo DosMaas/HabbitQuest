@@ -8,7 +8,6 @@ function DestinationPage() {
   const user = useSelector(store => store.user)
   const history = useHistory();
   const dispatch = useDispatch();
-  console.log(destinations, 'user:', user);
 
 
   useEffect(() => {
@@ -38,7 +37,6 @@ function DestinationPage() {
       <p>Something witty to explain the destinations</p>
       <section className="destinations">
         {destinations.map(destination => {
-          console.log('look here', destination);
           return <li key={destination.id}>
             {destination.name} {destination.distance}
             <button onClick={() => handleClick(destination)} key={destination.id}>Select</button>

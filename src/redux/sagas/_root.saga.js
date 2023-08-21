@@ -5,6 +5,7 @@ import userSaga from './user.saga';
 import destinationSaga from './destination.saga';
 import habitSaga from './habit.saga';
 import dailyHabitsSaga from './daily.saga';
+import progressSaga from './progress.saga';
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
 // This is imported in index.js as rootSaga
@@ -19,6 +20,7 @@ export default function* rootSaga() {
     userSaga(),
     destinationSaga(),
     habitSaga(),
-    dailyHabitsSaga()
+    dailyHabitsSaga(),
+    progressSaga(),
   ]);
 }

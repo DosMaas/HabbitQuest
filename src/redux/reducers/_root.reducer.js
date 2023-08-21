@@ -4,6 +4,7 @@ import user from './user.reducer';
 import destination from './destination.reducer';
 import habit from './habit.reducer';
 import daily from './daily.reducer';
+import progress from './progress.reducer'
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -16,7 +17,8 @@ const rootReducer = combineReducers({
   user, // will have an id and username if someone is logged in
   destination,
   habit,
-  daily
+  daily,
+  progress
 });
 
 export default rootReducer;

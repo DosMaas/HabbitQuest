@@ -27,7 +27,6 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 router.post('/', rejectUnauthenticated, (req, res) => {
   const habitName = req.body.newHabit;
   const userID = req.body.userID;
-  console.log({habitName, userID}, 'post route habitName')
   const query = `INSERT INTO habits ("name", "complete", "user_id") VALUES ($1, false, $2) RETURNING *;`;
   pool.query(query, [habitName, userID])
     .then(results => {

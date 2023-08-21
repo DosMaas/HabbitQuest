@@ -11,7 +11,8 @@ const passport = require('./strategies/user.strategy');
 const userRouter = require('./routes/user.router');
 const destinationRouter = require('./routes/destination.router');
 const habitsRouter = require('./routes/habits.router');
-const dailyRouter = require('./routes/daily.router')
+const dailyRouter = require('./routes/daily.router');
+const progressRouter = require('./routes/progress.router');
 
 // Express middleware
 app.use(express.json());
@@ -28,6 +29,7 @@ app.use('/api/user', userRouter);
 app.use('/api/destinations', destinationRouter);
 app.use('/api/habits', habitsRouter);
 app.use('/api/daily', dailyRouter);
+app.use('/api/progress', progressRouter);
 
 // Serve static files
 app.use(express.static('build'));
