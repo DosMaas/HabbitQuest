@@ -24,6 +24,7 @@ import './App.css';
 import DestinationPage from '../DestinationPage/DestinationPage';
 import HabitsPage from '../HabitsPage/HabitsPage';
 import DailyPage from '../DailyPage/DailyPage';
+import NavMenu from '../NavMenu/NavMenu';
 
 function App() {
   const dispatch = useDispatch();

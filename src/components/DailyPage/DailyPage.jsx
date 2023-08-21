@@ -18,6 +18,7 @@ import {
   GridActionsCellItem,
   GridRowEditStopReasons,
 } from '@mui/x-data-grid';
+import dayjs from 'dayjs';
 
 
 
@@ -28,6 +29,8 @@ function DailyPage() {
   const [rows, setRows] = useState(dailyHabits);
   const [rowModesModel, setRowModesModel] = useState({});
   const [selectedRow, setSelectedRow] = useState({});
+
+  const today = dayjs().format('dddd');
 
 
   // console.log('Ryan Here DailyPage \n', { dailyHabits, habits, rows, rowModesModel, GridRowModes });
@@ -196,7 +199,7 @@ function DailyPage() {
 
   return (
     <div>
-      <h1>Day of The Week Placeholder</h1>
+      <h1>{today}'s Habbits</h1>
       <div style={{ height: 400, width: '100%' }}>
 
         <Box
