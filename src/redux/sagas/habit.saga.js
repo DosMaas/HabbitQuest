@@ -26,7 +26,7 @@ function* fetchHabit() {
     const habit = yield response.json();
     yield put({ type: 'SET_HABIT', payload: habit});
   } catch(error) {
-    console.log('Habit get request failed', error);
+    console.error('Habit get request failed', error);
   }
 }
 

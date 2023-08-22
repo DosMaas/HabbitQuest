@@ -10,7 +10,7 @@ function* fetchDestination(action) {
     const destination = yield response.json();
     yield put({ type: 'SET_DESTINATION', payload: destination });
   } catch (error) {
-    console.log('Destination get request failed', error);
+    console.error('Destination get request failed', error);
   }
 }
 
@@ -27,7 +27,6 @@ function* addDestination(action) {
       throw new Error('Error adding destination');
     }
     const results = yield response.json();
-    console.log('response:', results);
     yield put({ type: 'USE_DESTINATION', payload: results});
   } catch (error) {
     console.error(error);

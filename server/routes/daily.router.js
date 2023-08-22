@@ -69,7 +69,7 @@ router.put('/complete', rejectUnauthenticated, async (req, res) => {
   const toggleQuery = `UPDATE habits SET complete = NOT complete WHERE id = $1`;
   const insertQuery = `
     INSERT INTO habit_log 
-      (habit_id, date, destination_id)
+      (habit_id, created_date, destination_id)
     SELECT 
       $1, current_date, destination_id
     FROM habit_destination
@@ -96,7 +96,6 @@ router.delete('/:id', rejectUnauthenticated, (req, res) => {
   ;`;
   pool.query(query, [req.params.id])
     .then(result => {
-      console.log('Habit deleted', result)
       res.sendStatus(200);
     })
     .catch(error => {

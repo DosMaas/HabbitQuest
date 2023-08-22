@@ -6,6 +6,9 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
 import LogOutButton from '../LogOutButton/LogOutButton';
 import MenuIcon from '@mui/icons-material/Menu';
+import Divider from '@mui/material/Divider';
+import Typography from '@mui/material/Typography';
+
 import { useHistory } from 'react-router-dom';
 
 
@@ -20,29 +23,36 @@ export default function NavMenu() {
 			path: '/home'
 		},
 		{
-			text: 'Info Page',
-			path: '/info'
+			text: 'Welcome',
+			path: '/welcome'
+		},
+		{
+			text: 'Destinations',
+			path: '/destinations'
+		},
+		{
+			text: 'Add Habits',
+			path: '/habits'
 		},
 		{
 			text: 'Daily Log',
 			path: '/daily'
 		},
 		{
+			text: 'Progress',
+			path: '/progress'
+		},
+		{
 			text: 'About',
 			path: '/about'
 		},
 		{
-			text: 'Add Habits',
-			path: '/habits'
+			text: 'Info Page',
+			path: '/info'
 		},
-    {
-      text: 'Progress',
-      path: '/progress'
-    },
 		{
 			text: 'Log Out',
 			path: '/logout',
-			component: <LogOutButton className="navLink" />
 		}
 	]; // End navItems
 
@@ -64,8 +74,28 @@ export default function NavMenu() {
 				anchor="right"
 				onClose={() => setOpen(false)}
 			>
-				<List>
+				<List >
 					{navItems.map((item, index) => {
+
+						if (item.path === '/logout') {
+							return (
+								<>
+									<Divider sx={{ marginBottom: "10px" }} />
+									<LogOutButton
+										style={{
+											margin: "0",
+											fontWeight: '400',
+											fontSize: '1rem',
+											lineHeight: '1.5',
+											fontFamily: 'fantasy',
+											paddingLeft: '16px',
+											textAlign: "left"
+										}}
+									/>
+								</>
+							)
+						}
+
 						return (
 							<ListItemButton
 								key={index}
@@ -75,7 +105,11 @@ export default function NavMenu() {
 									history.push(item.path)
 								}}
 							>
-								<ListItemText primary={item.text} />
+								<ListItemText>
+									<Typography sx={{ fontFamily: 'fantasy', textAlign: "left" }}>
+										{item.text}
+									</Typography>
+								</ListItemText>
 							</ListItemButton>
 						)
 					})}

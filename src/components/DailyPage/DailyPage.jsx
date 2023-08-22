@@ -12,6 +12,8 @@ import SaveIcon from '@mui/icons-material/Save';
 import CancelIcon from '@mui/icons-material/Close';
 import CheckIcon from '@mui/icons-material/Check';
 import DoDisturbOnIcon from '@mui/icons-material/DoDisturbOn';
+import Typography from '@mui/material/Typography';
+
 import {
   GridRowModes,
   GridToolbarContainer,
@@ -20,7 +22,8 @@ import {
 } from '@mui/x-data-grid';
 import dayjs from 'dayjs';
 import './DailyPage.css';
-
+import LinearProgress, { linearProgressClasses } from '@mui/material/LinearProgress';
+import { styled } from '@mui/material/styles';
 
 
 function DailyPage() {
@@ -30,6 +33,7 @@ function DailyPage() {
   const [rows, setRows] = useState(dailyHabits);
   const [rowModesModel, setRowModesModel] = useState({});
   const [selectedRow, setSelectedRow] = useState({});
+  const destinationProgress = useSelector(store => store.progress.destinationProgress)
 
   const today = dayjs().format('dddd');
 
@@ -55,7 +59,7 @@ function DailyPage() {
 
     return (
       <GridToolbarContainer>
-        <Button color="primary" startIcon={<AddIcon />} onClick={handleClick}>
+        <Button color="primary" variant="outlined" startIcon={<AddIcon />} onClick={handleClick}>
           Add Habbit
         </Button>
       </GridToolbarContainer>
@@ -84,11 +88,6 @@ function DailyPage() {
       ...rowModesModel,
       [id]: { mode: GridRowModes.View, ignoreModifications: true },
     });
-
-    // const editedRow = rows.find((row) => row.id === id);
-    // if (editedRow.isNew) {
-    //   setRows(rows.filter((row) => row.id !== id));
-    // }
   };
 
   // ⬇ Will submit the row's changed after editing: 
@@ -102,27 +101,15 @@ function DailyPage() {
     setRowModesModel(newRowModesModel);
   }; // End handleRowModesModelChange
 
-
-
   useEffect(() => {
-    dispatch({ type: 'FETCH_DAILY_HABITS' })
+    dispatch({ type: 'FETCH_DAILY_HABITS' }),
+      dispatch({ type: 'FETCH_DESTINATION_PROGRESS' })
   }, []);
-
-  // const d = new Date();
-  // let day = d.getDay();
-
-  function handleEdit(params) {
-
-  }
 
   function handleComplete(params) {
     dispatch({ type: 'COMPLETE_HABIT', payload: params.row })
   }
 
-  // function handleDelete(params) {
-  //   if (!window.confirm('Are you sure you want to delete this habit?')) return;
-  //   dispatch({ type: 'DELETE_HABIT', payload: params.row })
-  // }
 
   const columns = [
     {
@@ -146,12 +133,20 @@ function DailyPage() {
       headerName: 'My Habits',
       flex: 3,
       editable: true,
+      renderCell: (params) => {
+        return (
+          <Typography
+            style={{ textDecoration: params.row.complete ? 'line-through' : 'none' }}
+          >
+            {params.value}
+          </Typography>
+        );
+      },
     },
     {
       field: 'actions',
       type: 'actions',
       headerName: '',
-      // width: 1,
       flex: 1,
       cellClassName: 'actions',
       getActions: ({ id }) => {
@@ -192,45 +187,68 @@ function DailyPage() {
     }
   ]; // End columns
 
+  const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
+    height: 10,
+    borderRadius: 5,
+    [`&.${linearProgressClasses.colorPrimary}`]: {
+      backgroundColor: theme.palette.grey[theme.palette.mode === 'light' ? 200 : 800],
+    },
+    [`& .${linearProgressClasses.bar}`]: {
+      borderRadius: 5,
+      backgroundColor: theme.palette.mode === 'light' ? '#00e676' : '#308fe8',
+    },
+  }));
+
 
 
 
   return (
-    <div>
+    <div className='background'>
       <h1 className='daily-title'>{today}'s Habbits</h1>
-      <div style={{ height: 400, width: '100%' }}>
+      {/* <div style={{  width: '100%' }}> */}
 
-        <Box
-          sx={{
-            height: 500,
-            width: '100%',
-            fontFamily: 'fantasy, sans-serif', 
+      <Box
+        sx={{
+          height: 500,
+          width: '100%',
+          fontFamily: 'fantasy, sans-serif',
+        }}
+      >
+        <DataGrid
+          rows={dailyHabits}
+          columns={columns}
+          editMode='row'
+          rowModesModel={rowModesModel}
+          onRowModesModelChange={handleRowModesModelChange}
+          onRowEditStop={handleRowEditStop}
+          processRowUpdate={processRowUpdate}
+          onProcessRowUpdateError={(error) => console.error({ error })}
+          // slots={{
+          //   toolbar: EditToolbar,
+          // }}
+          slotProps={{
+            toolbar: { setRows, setRowModesModel },
           }}
-        >
-          <DataGrid
-            rows={dailyHabits}
-            columns={columns}
-            editMode='row'
-            rowModesModel={rowModesModel}
-            onRowModesModelChange={handleRowModesModelChange}
-            onRowEditStop={handleRowEditStop}
-            processRowUpdate={processRowUpdate}
-            onProcessRowUpdateError={(error) => console.error({ error })}
-            slots={{
-              toolbar: EditToolbar,
-            }}
-            slotProps={{
-              toolbar: { setRows, setRowModesModel },
-            }}
-            rowSelectionModel={selectedRow?.id}
-            onRowSelectionModelChange={rowId => {
-              const foundRow = dailyHabits.find((row) => row.id == rowId);
-              setSelectedRow(foundRow);
-            }}
+          rowSelectionModel={selectedRow?.id}
+          onRowSelectionModelChange={rowId => {
+            const foundRow = dailyHabits.find((row) => row.id == rowId);
+            setSelectedRow(foundRow);
+          }}
+        />
+      </Box>
+      {/* </div> */}
+      <Box>
+        <div style={{ width: "95%", margin: "10px auto" }}>
+          <BorderLinearProgress
+            variant="determinate"
+            value={`${destinationProgress.percentage_completion}`}
+            sx={{ padding: '5px', width: "97%" }}
           />
-        </Box>
-      </div>
-
+        </div>
+        <p style={{ paddingTop: "5px", textAlign: "center", fontSize: "18px" }}>
+          Your Progress to {destinationProgress.destination_name}
+        </p>
+      </Box>
 
     </div>
   )

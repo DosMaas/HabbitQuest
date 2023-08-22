@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
+import './HabitsPage.css'
 
 
 function HabitsPage() {
@@ -37,13 +40,17 @@ function HabitsPage() {
         ready to begin your quest just yet. Create
         your habbits below before you leave!
       </p>
-      <form onSubmit={addHabit}>
-        <input
+      <form onSubmit={addHabit} className="input-field">
+        <TextField
+           className="input"
+          variant="outlined"
+          size="small"
+          color="success"
           type="text"
           onChange={(event) => setNewHabit(event.target.value)}
           value={newHabit}
         />
-        <button type="submit" >Add Habit</button>
+        <Button type="submit" variant="contained" color="success" >Add Habit</Button>
         {/* Make button click disabled without input text */}
       </form>
       <div className="habits">
@@ -60,7 +67,7 @@ function HabitsPage() {
                 </tr>})}
           </tbody>
         </table>
-        <button onClick={handleSubmit}>Begin My Quest!</button>
+        <Button className="button" variant="contained" color="success" onClick={handleSubmit}>Begin My Quest!</Button>
       </div>
     </div>
   )

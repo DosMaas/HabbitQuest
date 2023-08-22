@@ -5,7 +5,7 @@
   align-items: center;
 
   margin: 0 0 30px;
-  background-color: tan;
+  background-color: #00e676;
   overflow: hidden;
 }
 
@@ -25,7 +25,7 @@
 .navLink {
   display: inline-block;
   color: #f2f2f2;
-  background-color: tan;
+  background-color: #00e676;
   text-align: center;
   padding: 24px 10px;
   text-decoration: none;
@@ -39,5 +39,27 @@
 }
 
 .navLink:hover {
-  background-color: tan;
+  background-color: #00e676;
 }
+
+
+
+.nav {
+  display: flex;
+  justify-content: space-between;
+  margin: 0 0 10px;
+  background-color: #3e2723; /* Deep brown, reminiscent of earthy tones */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+.nav-title {
+  font-size: 24px;
+  color: #ff9800; /* Warm orange, reminiscent of the One Ring */
+  color: white;
+  margin: 0;
+}
+
+.nav-title:hover {
+  text-decoration: none;
+}
+

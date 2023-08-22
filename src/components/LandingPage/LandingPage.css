@@ -13,6 +13,10 @@ Grid
   align-items: flex-start;
 }
 
+h2 {
+  text-align: center;
+}
+
 .grid-col {
   flex: 0 0 auto;
   padding: 0 0.5rem 0.5rem;
@@ -55,8 +59,8 @@ Grid
 }
 
 .grid-col_8 {
-  flex-basis: 66.66666667%;
-  max-width: 66.66666667%;
+  flex-basis: 80%;
+  max-width: 80;
 }
 
 .grid-col_9 {

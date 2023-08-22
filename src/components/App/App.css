@@ -7,6 +7,9 @@ body,
 body {
   font-family: fantasy, sans-serif;
   margin: 0px;
+  background-image: url('../../../public/images/vintage-grunge-paper-background.webp');
+  background-size: cover;
+
 }
 
 img {
@@ -97,7 +100,7 @@ Form Treatment
 
 .formPanel {
   box-sizing: border-box;
-  width: 400px;
+  width: 300px;
   max-width: 100%;
   padding: 25px;
   margin: 0 auto 20px;

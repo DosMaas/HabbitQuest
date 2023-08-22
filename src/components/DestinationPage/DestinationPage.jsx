@@ -1,6 +1,8 @@
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import './DestinationPage.css';
+import Button from '@mui/material/Button';
 
 
 function DestinationPage() {
@@ -17,10 +19,12 @@ function DestinationPage() {
   function handleClick(destination) {
     // let destinationID = destination.id;
     // let userID = user.id;
-    dispatch({ type: 'ADD_DESTINATION', payload: {
-      destination_id: destination.id,
-      user_id: user.id
-    } });
+    dispatch({
+      type: 'ADD_DESTINATION', payload: {
+        destination_id: destination.id,
+        user_id: user.id
+      }
+    });
     history.push('/habits')
   }
 
@@ -30,18 +34,26 @@ function DestinationPage() {
   //     type: 'ADD_DESTINATION'});
   //     history.push('/creation')
   // }
-    
+
   return (
     <div>
       <h2>Choose Your Destination</h2>
-      <p>Something witty to explain the destinations</p>
+      <p>Choose a destination to begin exploring Middle Earth. Every habit you complete gets you one step closer!</p>
       <section className="destinations">
-        {destinations.map(destination => {
-          return <li key={destination.id}>
-            {destination.name} {destination.distance}
-            <button onClick={() => handleClick(destination)} key={destination.id}>Select</button>
-          </li>
-        })}
+        <table className="table">
+          <tbody>
+
+            {destinations.map(destination => {
+              return <tr key={destination.id}>
+                <td>{destination.name}</td>
+                <td>{destination.distance}</td>
+                <td>
+                  <Button onClick={() => handleClick(destination)} key={destination.id} variant="contained" color="success">Select</Button>
+                  </td>
+              </tr>
+            })}
+          </tbody>
+        </table>
       </section>
       <div>
         {/* <button onClick={continueClick}>Let's Go!</button> */}

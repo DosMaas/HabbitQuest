@@ -10,7 +10,7 @@ function* fetchDailyHabits() {
     const habits = yield response.json();
     yield put({type: 'SET_DAILY_HABITS', payload: habits});
   } catch(error) {
-    console.log('Daily habits get request failed', error)
+    console.error('Daily habits get request failed', error)
   }
 };
 
@@ -44,18 +44,17 @@ function* editHabit(action) {
 
 
 function* completeHabit(action) {
-  console.log('Action', action.payload)
   try {
     const response = yield fetch('/api/daily/complete', {
       method: 'PUT',
       body: JSON.stringify(action.payload),
       headers: { "Content-Type": "application/json" },
     });
-    console.log('Completed habit!')
     if (!response.ok) {
       throw new Error('Error completing habit');
     }
     yield put({ type: 'FETCH_DAILY_HABITS'});
+    yield put({ type: 'FETCH_DESTINATION_PROGRESS'});
   } catch (error) {
     console.error('Error fetching habits', error)
   };
