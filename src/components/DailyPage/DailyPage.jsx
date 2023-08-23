@@ -195,9 +195,11 @@ function DailyPage() {
     },
     [`& .${linearProgressClasses.bar}`]: {
       borderRadius: 5,
-      backgroundColor: theme.palette.mode === 'light' ? '#00e676' : '#308fe8',
+      backgroundColor: theme.palette.mode === 'light' ? '#1b5e20' : '#308fe8',
     },
   }));
+
+  
 
 
 
@@ -241,7 +243,7 @@ function DailyPage() {
         <div style={{ width: "95%", margin: "10px auto" }}>
           <BorderLinearProgress
             variant="determinate"
-            value={`${destinationProgress.percentage_completion}`}
+            value={parseFloat(destinationProgress.percentage_completion) || 0}
             sx={{ padding: '5px', width: "97%" }}
           />
         </div>

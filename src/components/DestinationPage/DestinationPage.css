@@ -8,12 +8,16 @@ p {
   font-size: 20px;
 }
 
-.table {
-  margin-left: auto;
-  margin-right: auto;
+table, td, tr {
+  margin-left: 10px;
+  margin-right: 10px;
+  text-align: left;
+  padding-top: 2px;
+  table-layout: fixed;
+  width: 95%
 }
 
-td {
-  padding: 5px;
-
+td, tr {
+  width: 90px;
 }
+

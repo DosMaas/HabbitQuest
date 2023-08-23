@@ -38,15 +38,15 @@ function DestinationPage() {
   return (
     <div>
       <h2>Choose Your Destination</h2>
-      <p>Choose a destination to begin exploring Middle Earth. Every habit you complete gets you one step closer!</p>
+      <p>Choose a destination to begin exploring Middle Earth. Choose wisely, every destination has a different distance. Each habit you complete gets you one step closer!</p>
       <section className="destinations">
         <table className="table">
           <tbody>
 
             {destinations.map(destination => {
               return <tr key={destination.id}>
-                <td>{destination.name}</td>
-                <td>{destination.distance}</td>
+                <td style={{width: 'auto'}} className="name">{destination.name}</td>
+                <td style={{width: 'auto'}} className="steps">{destination.distance} steps</td>
                 <td>
                   <Button onClick={() => handleClick(destination)} key={destination.id} variant="contained" color="success">Select</Button>
                   </td>

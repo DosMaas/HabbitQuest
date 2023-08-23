@@ -22,6 +22,7 @@ function* fetchDestinationProgress() {
       throw new Error('Network response was not ok in fetch destination progress');
     }
     const destinationProgress = yield response.json();
+    console.log({destinationProgress})
     yield put({ type: 'SET_DESTINATION_PROGRESS', payload: destinationProgress});
   } catch(error) {
     console.error('Destination progress get request failed', error)

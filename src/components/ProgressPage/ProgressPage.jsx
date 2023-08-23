@@ -12,6 +12,7 @@ function ProgressPage() {
   const dispatch = useDispatch();
   const habitProgress = useSelector(store => store.progress.habitProgress);
   const destinationProgress = useSelector(store => store.progress.destinationProgress);
+  console.log({habitProgress})
 
   useEffect(() => {
     dispatch({ type: 'FETCH_HABITS_PROGRESS' }),
@@ -26,13 +27,13 @@ function ProgressPage() {
     },
     [`& .${linearProgressClasses.bar}`]: {
       borderRadius: 5,
-      backgroundColor: theme.palette.mode === 'light' ? '#1a90ff' : '#308fe8',
+      backgroundColor: theme.palette.mode === 'light' ? '#1b5e20' : '#308fe8',
     },
   }));
  
   return (
     <div>
-      <h1>Progress Page</h1>
+      <h1 style={{textAlign: "center"}}>Your Progress</h1>
       {/* // ⬇ Destination Progress */}
       <h2>Destination Progress</h2>
       {/* {destination.u} */}
@@ -40,11 +41,11 @@ function ProgressPage() {
         <CardMedia
           sx={{ height: 200 }}
           image={`/images/${destinationProgress.image_url}`} 
-          title="green iguana"
+          // title="green iguana"
         />
-        <CardContent>
-        <BorderLinearProgress variant="determinate" value={`${destinationProgress.percentage_completion}`}/>
-          You are {destinationProgress.steps_completed} steps out of {destinationProgress.target_distance} from {destinationProgress.destination_name}.
+        <CardContent sx={{backgroundColor: 'tan'}}>
+        <BorderLinearProgress variant="determinate" value={parseFloat(destinationProgress.percentage_completion) || 0}/>
+          You are {destinationProgress.steps_completed || 0} steps out of {destinationProgress.target_distance} from {destinationProgress.destination_name}.
 
         </CardContent>
       </Card>
@@ -62,7 +63,7 @@ function ProgressPage() {
                       return '#d9f7be'
                     } else if (habit.completion_percentage >= 50) {
                       return '#fff9c4'
-                    } else if (habit.completion_percentage <= 25) {
+                    } else if (habit.completion_percentage <= 50) {
                       return '#ffcdd2'
                     }
                   },

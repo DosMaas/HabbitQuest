@@ -72,10 +72,6 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
     VALUES 
       ($1, $2, NOW(), true)
     RETURNING *;
-
-    UPDATE habit_destination
-    SET active = false
-    WHERE user_id = $1 AND destination_id <> $2;
   `;
 
   const updateQuery = `
@@ -95,9 +91,11 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
     const checkResult = await pool.query(checkQuery, params);
     const count = checkResult.rows[0].count;
 
-    if (count === 0) {
+    if (count == 0) {
       // No record exists, insert new row
       const insertResult = await pool.query(insertQuery, params);
+      const updateResult = await pool.query(updateQuery, params);
+
       res.send(insertResult.rows);
     } else {
       // Record exists, update existing row

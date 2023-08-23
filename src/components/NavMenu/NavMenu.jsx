@@ -79,7 +79,7 @@ export default function NavMenu() {
 
 						if (item.path === '/logout') {
 							return (
-								<>
+								<div key={index}>
 									<Divider sx={{ marginBottom: "10px" }} />
 									<LogOutButton
 										style={{
@@ -92,7 +92,7 @@ export default function NavMenu() {
 											textAlign: "left"
 										}}
 									/>
-								</>
+								</div>
 							)
 						}
 

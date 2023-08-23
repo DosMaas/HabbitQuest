@@ -45,6 +45,7 @@ function HabitsPage() {
            className="input"
           variant="outlined"
           size="small"
+          margin-right="5px"
           color="success"
           type="text"
           onChange={(event) => setNewHabit(event.target.value)}
@@ -67,7 +68,9 @@ function HabitsPage() {
                 </tr>})}
           </tbody>
         </table>
-        <Button className="button" variant="contained" color="success" onClick={handleSubmit}>Begin My Quest!</Button>
+      </div>
+      <div className="button">
+      <Button variant="contained" color="success"  onClick={handleSubmit}>Begin My Quest!</Button>
       </div>
     </div>
   )
