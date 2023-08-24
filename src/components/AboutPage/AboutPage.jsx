@@ -9,7 +9,7 @@ function AboutPage() {
   return (
     <div className="container">
       <div>
-        <p>JavaScript, React, Redux</p>
+        <p>This app was created to help user create and stick to new habits by combining a habit tracker with an additional goal of reaching a final destination.</p>
       </div>
     </div>
   );
