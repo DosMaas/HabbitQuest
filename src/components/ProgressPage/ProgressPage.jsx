@@ -8,6 +8,7 @@ import CardMedia from '@mui/material/CardMedia';
 import LinearProgress, { linearProgressClasses } from '@mui/material/LinearProgress';
 import { styled } from '@mui/material/styles';
 
+
 function ProgressPage() {
   const dispatch = useDispatch();
   const habitProgress = useSelector(store => store.progress.habitProgress);
